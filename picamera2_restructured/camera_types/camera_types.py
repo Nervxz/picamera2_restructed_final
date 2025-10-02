@@ -7,13 +7,18 @@ This module provides TypedDict, Enum, and other type definitions used throughout
 from enum import Enum
 from typing import TypedDict, Any
 
+# Import preview classes
+from ..previews.null_preview import NullPreview
+from ..previews.drm_preview import DrmPreview
+from ..previews.qt_previews import QtPreview, QtGlPreview
+
 
 class Preview(Enum):
     """Enum that applications can pass to the start_preview method."""
-    NULL = "null"
-    DRM = "drm"
-    QT = "qt"
-    QTGL = "qtgl"
+    NULL = NullPreview
+    DRM = DrmPreview
+    QT = QtPreview
+    QTGL = QtGlPreview
 
 
 class GlobalCameraInfo(TypedDict):

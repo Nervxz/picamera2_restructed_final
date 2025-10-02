@@ -15,9 +15,15 @@ import queue
 import sys
 import threading
 from functools import lru_cache
+from pathlib import Path
 
 import cv2
 import numpy as np
+
+# Add parent directory to path to find picamera2_restructured module
+parent_dir = Path(__file__).resolve().parent.parent.parent
+if str(parent_dir) not in sys.path:
+    sys.path.insert(0, str(parent_dir))
 
 # Import from restructured picamera2 module
 from picamera2_restructured import Picamera2
