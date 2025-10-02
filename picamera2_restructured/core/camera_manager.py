@@ -12,14 +12,8 @@ from typing import Optional, Dict
 
 import libcamera
 
-# Will be imported later to avoid circular dependency
-CompletedRequest = None
-
-
-def set_completed_request_class(cls):
-    """Set the CompletedRequest class to avoid circular imports."""
-    global CompletedRequest
-    CompletedRequest = cls
+# Import CompletedRequest directly - no circular dependency issue
+from ..request import CompletedRequest
 
 
 class CameraManager:
@@ -103,7 +97,6 @@ class CameraManager:
         
         :param flushid: Optional flush ID to filter requests
         """
-        global CompletedRequest
         with self._lock:
             cams = set()
             for req in self.cms.get_ready_requests():
@@ -117,4 +110,4 @@ class CameraManager:
                 os.write(self.cameras[c].notifyme_w, b"\x00")
 
 
-__all__ = ['CameraManager', 'set_completed_request_class']
+__all__ = ['CameraManager']
